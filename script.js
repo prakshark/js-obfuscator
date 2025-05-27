@@ -7,6 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const jsCodeTextarea = document.getElementById('js-code');
     const jsFileInput = document.getElementById('js-file');
     const obfuscatedCodeTextarea = document.getElementById('obfuscated-code');
+    const loadingOverlay = document.querySelector('.loading-overlay');
+
+    // Ensure loading overlay is hidden on page load
+    loadingOverlay.style.display = 'none';
 
     // Tab switching
     tabBtns.forEach(btn => {
@@ -37,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    prompt: `Obfuscate this JavaScript code while maintaining its functionality:\n\n${code}`,
+                    prompt: `Obfuscate this JavaScript by collapsing it into a single line of code by making sure no newline character is used in the code and everything is written in one line and make the variable names random set of characters and numbers code while maintaining its functionality:\n\n${code}`,
                     max_tokens: 1000,
                     temperature: 0.7,
                     k: 0,
@@ -73,18 +77,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Show loading state
+        // Show loading overlay
+        loadingOverlay.style.display = 'flex';
         obfuscateBtn.disabled = true;
-        obfuscateBtn.textContent = 'Obfuscating...';
 
         // Perform obfuscation
         const obfuscatedCode = await obfuscateCode(code);
         obfuscatedCodeTextarea.value = obfuscatedCode;
         downloadBtn.classList.remove('hidden');
 
-        // Reset button state
+        // Hide loading overlay
+        loadingOverlay.style.display = 'none';
         obfuscateBtn.disabled = false;
-        obfuscateBtn.textContent = 'Obfuscate';
     });
 
     // Handle download button click
