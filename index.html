@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Obfuscator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>JavaScript Obfuscator</h1>
+        
+        <div class="input-section">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="text">Text Input</button>
+                <button class="tab-btn" data-tab="file">File Upload</button>
+            </div>
+
+            <div class="tab-content" id="text-input">
+                <textarea id="js-code" placeholder="Paste your JavaScript code here..."></textarea>
+            </div>
+
+            <div class="tab-content hidden" id="file-input">
+                <input type="file" id="js-file" accept=".js">
+            </div>
+
+            <button id="obfuscate-btn">Obfuscate</button>
+        </div>
+
+        <div class="output-section">
+            <h2>Obfuscated Code</h2>
+            <textarea id="obfuscated-code" readonly></textarea>
+            <button id="download-btn" class="hidden">Download Obfuscated File</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
